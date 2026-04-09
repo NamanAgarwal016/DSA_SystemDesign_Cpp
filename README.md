@@ -1,90 +1,90 @@
-# DSA & System Design in C++
+﻿# DSA System Design in C++
 
-This repository contains my practice implementations and notes for Data Structures & Algorithms (DSA) and System Design concepts, all written in C++. It's a comprehensive collection of code examples, design patterns, and problem-solving approaches to help with interview preparation and learning.
+This repository is my personal C++ practice workspace for Data Structures & Algorithms, system design fundamentals, object-oriented design, and C++ core concepts.
+
+## 📌 What’s Included
+
+- **DSA practice** with algorithm implementations and problem-solving code.
+- **System design examples** using low-level design and design patterns.
+- **C++ concepts** including smart pointers, RAII, multithreading, and custom class design.
+- **Real-world case studies** such as notification systems, payment services, and clone-style apps.
 
 ## 📁 Repository Structure
 
 ### DSA/
-- **Binary Search**: Basic binary search algorithms.
-- **Kadane Algorithm**: Maximum subarray sum problems.
-- **Dynamic Programming (DP/)**:
-  - Knapsack problems (0/1 and Unbounded).
-  - Longest Common Subsequence (LCS).
-  - Longest Increasing Subsequence (LIS).
-  - Palindrome Blueprints.
-  - DP on Trees.
+- **Binary Search** and array-based search problems.
+- **Kadane Algorithm** for maximum subarray problems.
+- **Dynamic Programming**:
+  - Knapsack (0/1 and Unbounded)
+  - Longest Common Subsequence (LCS)
+  - Longest Increasing Subsequence (LIS)
+  - DP on Trees
+  - Palindrome and subsequence problems
 - **Graph Algorithms**:
-  - Graph Representations (Adjacency List, Matrix, Pointer-based).
-  - Traversals (BFS, DFS).
-  - Cycles (Directed and Undirected).
-  - Shortest Path Algorithms (Dijkstra, Bellman-Ford, Floyd-Warshall).
-  - Minimum Spanning Tree (MST).
-  - Disjoint Set Union (DSU).
-  - Topological Sort.
-  - Bipartite Graph Check.
+  - Graph representations with adjacency lists and matrices
+  - BFS, DFS traversals
+  - Cycle detection in directed and undirected graphs
+  - Dijkstra, Bellman-Ford, and Floyd-Warshall
+  - Minimum spanning tree and DSU
+  - Topological sort and bipartite checking
 
 ### SystemDesign/
-- **Low-Level Design (LLD/)**:
-  - **OOPS**: Abstraction, Encapsulation, Inheritance, Polymorphism (Static & Dynamic).
-  - **Design Patterns**:
-    - Creational: Factory, Singleton, Builder (with Director and Step Builder).
-    - Structural: Adapter, Decorator, Facade.
-    - Behavioral: Command, Observer, Strategy.
-  - **SOLID Principles**: SRP, OCP, LSP, ISP, DIP with examples.
-  - **Questions**: Real-world problems like Document Editor, Notification Service, Parking Lot, Payment System, Spotify Clone, Zepto Clone, Zomato Clone.
-- **UML Diagrams**: PDFs for various designs.
+- **Low-Level Design (LLD/)**
+  - OOP fundamentals: abstraction, encapsulation, inheritance, polymorphism
+  - Design patterns: Factory, Singleton, Builder, Adapter, Decorator, Facade, Command, Observer, Strategy
+  - SOLID principles: SRP, OCP, LSP, ISP, DIP
+- **System design problems**:
+  - Document editor
+  - Notification service
+  - Parking lot
+  - Payment system
+  - Spotify clone
+  - Zepto clone
+  - Zomato clone
+- **UML diagrams and design documentation** included as PDFs and images.
 
-### Other Files
-- `main.cpp`: Smart pointers demonstration (unique_ptr, shared_ptr, weak_ptr).
-- `MultiThreading.cpp`: Basic multithreading examples.
-- `SmartPointers.cpp`: In-depth smart pointer usage.
-- `StringClassImplementation.cpp`: Custom string class.
+### Core C++ Files
+- `SmartPointers.cpp` — completed smart pointers topic with unique_ptr, shared_ptr, weak_ptr, and ownership rules.
+- `main.cpp` — sample code for smart pointer usage and demonstration.
+- `MultiThreading.cpp` — basic multithreading examples.
+- `StringClassImplementation.cpp` — custom string class implementation.
 
-## 🚀 How to Use
+## 🚀 Getting Started
 
 ### Prerequisites
-- C++ Compiler (e.g., g++, clang++)
-- Git (for cloning)
+- C++ compiler (e.g., `g++`, `clang++`)
+- Git
 
-### Clone the Repository
+### Clone the repository
 ```bash
-git clone https://github.com/NamanAgarwal016/DSA_SystemDesgin_Cpp.git
-cd DSA_SystemDesgin_Cpp
+git clone https://github.com/NamanAgarwal016/DSA_SystemDesign_Cpp.git
+cd DSA_SystemDesign_Cpp
 ```
 
-### Compile and Run
-Each `.cpp` file is standalone. To compile:
+### Compile and run a file
 ```bash
-g++ filename.cpp -o output
-./output
+g++ SmartPointers.cpp -o SmartPointers
+./SmartPointers
 ```
 
-For example, to run the main smart pointers demo:
+To run the general demo:
 ```bash
 g++ main.cpp -o main
 ./main
 ```
 
-### Build Task (VS Code)
-The repository includes a VS Code task for building `main.cpp`:
-- Open in VS Code.
-- Press `Ctrl+Shift+P` > "Tasks: Run Task" > "build".
+## 🧠 Notes
 
-## 📚 Topics Covered
-
-- **Data Structures**: Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Heaps, Hash Tables.
-- **Algorithms**: Searching, Sorting, Greedy, Divide & Conquer, Backtracking, Dynamic Programming.
-- **System Design**: Object-Oriented Programming, Design Patterns, SOLID Principles, Low-Level Design.
-- **C++ Concepts**: Smart Pointers, Multithreading, RAII, Templates, STL.
+- Each `.cpp` file is typically self-contained.
+- Use `make` or custom build scripts only if added later.
+- Avoid committing compiled binaries; keep the repository source-only when possible.
 
 ## 🤝 Contributing
 
-Feel free to open issues or submit pull requests if you find bugs or want to add more examples. This is for learning purposes, so contributions are welcome!
+This repo is for learning and sharing. Contributions, improvements, and issue reports are welcome.
 
 ## 📄 License
 
-This project is open-source and available under the [MIT License](LICENSE).
-
----
+This project is available under the [MIT License](LICENSE).
 
 Happy coding! 🚀
