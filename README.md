@@ -45,7 +45,7 @@ This repository is my personal C++ practice workspace for Data Structures & Algo
 
 ### Core C++ Files
 - `SmartPointers.cpp` — completed smart pointers topic with unique_ptr, shared_ptr, weak_ptr, and ownership rules.
-- `main.cpp` — sample code for smart pointer usage and demonstration.
+- `main.cpp` — general entry point file used to execute other C++ examples and temporary demos.
 - `MultiThreading.cpp` — basic multithreading examples.
 - `StringClassImplementation.cpp` — custom string class implementation.
 
@@ -67,7 +67,8 @@ g++ SmartPointers.cpp -o SmartPointers
 ./SmartPointers
 ```
 
-To run the general demo:
+### Using `main.cpp`
+`main.cpp` is intended as a general entry point for running different C++ examples. Update its contents to call the code you want to execute, then build it:
 ```bash
 g++ main.cpp -o main
 ./main
