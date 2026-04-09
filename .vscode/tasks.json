@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build", // The label for the task. This is how you will refer to the task in other configurations, such as in the launch.json file.
+            "type": "shell", // Specifies that this task will run a shell command.
+            "command": "g++", // The command to run. In this case, it is the g++ compiler.
+            "args": [ // Arguments to pass to the command.
+                "-g", // Generate debug information.
+                "main.cpp", // The source file to compile.
+                "-o", // Specifies the output file.
+                "main" // The name of the output file (the executable).
+            ],
+            "group": { // Specifies the task group.
+                "kind": "build", // Indicates that this is a build task.
+                "isDefault": true // Specifies that this is the default build task.
+            },
+            // "problemMatcher": ["$gcc"], // Specifies the problem matcher to use. The problem matcher parses the output of the command and detects errors and warnings.
+            // "detail": "Generated task by GitHub Copilot" // Additional details about the task.
+        }
+    ]
+}

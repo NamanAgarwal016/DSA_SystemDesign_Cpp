@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch", // The name of the configuration, which will be displayed in the debug configuration dropdown.
+            "type": "cppdbg", // Specifies that this configuration is for C++ debugging.
+            "request": "launch", // Indicates that this configuration will launch the program.
+            "program": "${workspaceFolder}/main", // The path to the executable to be debugged. ${workspaceFolder} is a variable that points to the root of the workspace.
+            "args": [], // Arguments to pass to the program. This is an empty array, meaning no arguments are passed.
+            "stopAtEntry": false, // If true, the debugger will stop at the entry point of the program.
+            "cwd": "${workspaceFolder}", // The working directory of the program being debugged. ${workspaceFolder} points to the root of the workspace.
+            "environment": [], // Environment variables to set for the program being debugged. This is an empty array, meaning no additional environment variables are set.
+            "externalConsole": false, // If true, the program will be launched in an external console window.
+            "MIMode": "gdb", // Specifies that the debugger to use is GDB (GNU Debugger).
+            "setupCommands": [ // Commands to run when the debugger starts.
+                {
+                    "description": "Enable pretty-printing for gdb", // A description of the command.
+                    "text": "-enable-pretty-printing", // The command to run. This enables pretty-printing in GDB, which makes the output of complex data structures more readable.
+                    "ignoreFailures": true // If true, the debugger will ignore failures of this command.
+                }
+            ],
+            "preLaunchTask": "build", // The task to run before launching the debugger. This is typically a build task to compile the program.
+            "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe" // The path to the GDB executable.
+        }
+    ]
+}

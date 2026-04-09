@@ -1,0 +1,186 @@
+// Suggestions/ Interview Assesssment:
+
+Updating the todo list to mark scanning complete and remaining tasks done (so the plan reflects progress).
+
+Completed (1/4) Scan ZomatoClone files
+
+Progress update — what I ran and what I found
+
+I scanned these files under ZomatoClone: Tomato.h, factories/*, managers/*, models/*, services/*, strategies/*, utils/*.
+Key flow: Tomato (Singleton) sets up restaurants/menu, creates a User and Cart, uses an OrderFactory (Now/Schedule) to create either DeliveryOrder or PickupOrder, injects a PaymentStrategy, calls makePayment() and NotificationService.
+Next: concise interview-style feedback and rating below.
+Crisp interview-style assessment (short bullets)
+
+Overall rating: 7 / 10 (strong for a short LLD answer, but with some important correctness/robustness issues)
+
+Why 7: Good use of core patterns and clear user-journey wiring (Singleton, Factory, Strategy). Code is readable and demonstrates awareness of separation (models/managers/factories/strategies/services). Points deducted for ownership/polymorphism bugs, memory leaks, and API safety that a senior interviewer will probe.
+Strengths (what interviewers will like)
+
+Pattern usage: clear use of Factory for time-based order creation and Strategy for payment — shows design-pattern knowledge.
+Separation of concerns: models, managers, factories, strategies and services are organized into folders/files.
+Simple, readable flow that mirrors an LLD conversation: setup -> select -> create order -> pay -> notify.
+Dependency injection for payment strategy into Order (constructor-level injection).
+Easy-to-follow example code you can extend in a follow-up.
+High-impact issues & weaknesses (what interviewers will question)
+
+Ownership & memory management
+Raw new allocations (factories and PaymentStrategy objects) are never freed -> memory leaks.
+Singleton objects created with new and exposed raw pointers (no lifecycle control or thread-safety).
+Polymorphism / object slicing
+OrderManager stores vector<Order> (base class by value). That slices derived objects (DeliveryOrder/PickupOrder) — polymorphism broken.
+Similarly, managers store vector<Restaurant> and return Restaurant* pointing into vector; vector resizing can invalidate pointers.
+Incorrect container / ownership choices
+Store polymorphic objects as values instead of pointer/unique_ptr/shared_ptr -> incorrect behavior and slicing.
+Returning raw pointers to internal vector elements is fragile.
+Error handling / null-checks
+RestaurantManager::searchByAddress can return nullptr but Tomato::runApp assumes non-null and dereferences result. No checks for factory returning nullptr.
+Use of magic strings
+Several places use strings for modes ("now", "schedule", "delivery", "pickup", "creditcard") — interviewer will ask for enums or typed values.
+Thread-safety and concurrency
+Static counters and singletons are not thread-safe (not required for small demo, but interviewers often ask about scaling).
+Header hygiene / API design
+using namespace std; in headers (bad practice).
+Public headers include heavy iostream use — increases coupling.
+Business logic gaps
+Cart allows adding items without enforcing restaurant consistency.
+No validation for empty cart, payment failures, retry / rollback logic, or order lifecycle states (placed, preparing, delivered).
+Missing tests and logging/metrics hooks.
+Concrete, concise improvements to raise this toward 9/10 (non-const changes)
+
+Fix polymorphism & ownership
+Store polymorphic objects in containers as smart pointers: e.g., vector<unique_ptr<Order>> in OrderManager, vector<shared_ptr<Restaurant>> in RestaurantManager.
+Change factory API to return unique_ptr<Order> instead of raw Order*.
+Eliminate raw new/delete and use RAII/smart pointers
+Use std::unique_ptr/std::shared_ptr for PaymentStrategy, factories, orders, and manager singletons (or inject instances).
+Avoid slicing / unsafe returns
+Return shared_ptr<Restaurant> or an ID (and provide lookup) instead of pointer to an element inside vector<Restaurant>.
+Replace magic strings with enums or strong types
+Use enums for OrderTimeType, DeliveryType, PaymentType — easier to validate and refactor.
+Improve APIs & error handling
+Add null checks where factory can return nullptr, and handle searchByAddress==nullptr gracefully.
+Add basic error paths for payment failures and notify user accordingly.
+Cart / business rules
+Enforce that all items in a cart belong to the same restaurant; set restaurant when first item is added.
+Add order lifecycle (enum: CREATED, PAID, PREPARING, OUT_FOR_DELIVERY, COMPLETED).
+Avoid using namespace std in headers and remove heavy iostreams from headers (move printing to .cpp or services).
+Thread-safety & concurrency (optional but high-impact)
+Protect statics with atomics or mutexes if you expect concurrency; or state single-thread assumptions.
+Tests & small improvements
+Add unit tests for factories, payment strategies, restaurant search, and OrderManager behaviors (especially to show you fixed slicing).
+Add comments on ownership (who owns what) or use documentation.
+Quick list of top technical questions you should be ready to answer in an interview
+
+How do you handle polymorphism and why vector<Order> is wrong? (explain slicing)
+Who owns the Order/PaymentStrategy objects? How would you free them / avoid leaks?
+How do you ensure cart items are from the same restaurant?
+How would you extend the design to support multiple payment methods (split payment), or add order retries, refunds?
+How to scale notification delivery (async queue, retries) and add logging/observability?
+Minimal prioritized fixes I’d implement immediately (low-risk)
+
+Change factory to return unique_ptr<Order>; store orders in OrderManager as vector<unique_ptr<Order>>.
+Replace factory/payment allocations with smart pointers in Tomato.
+Make RestaurantManager hold vector<shared_ptr<Restaurant>> and return shared_ptr<Restaurant>.
+Add null checks after searchByAddress and factory create.
+These small changes fix the most serious correctness bugs (slicing, leaks, dangling pointers) and will substantially raise your score.
+One-line concise summary for an interviewer
+
+"Good demonstration of patterns and separation (7/10): readable and extensible, but needs fixes for ownership (smart pointers), polymorphism (avoid slicing), safety (null checks/validation), and API hardening (enums, header hygiene) to be production-grade."
+
+
+////////////////////////////////////
+Q4: How would you extend the design to support split payment (e.g., 50% card, 50% netbanking) or add order retries/refunds?
+Answer:
+
+Split Payment:
+Create a composite payment strategy:
+
+class SplitPaymentStrategy : public PaymentStrategy {
+private:
+    vector<PaymentStrategy*> strategies;  // Multiple payment modes
+    vector<int> amounts;  // Amounts for each mode
+public:
+    void addPaymentMode(PaymentStrategy* mode, int amount) {
+        strategies.push_back(mode);
+        amounts.push_back(amount);
+    }
+    void pay(int totalAmount) override {
+        for(size_t i = 0; i < strategies.size(); i++) {
+            strategies[i]->pay(amounts[i]);
+        }
+    }
+};
+
+
+
+/////
+Order Retries & Refunds:
+Add an order lifecycle enum and retry logic:
+enum class OrderStatus { CREATED, PAYMENT_FAILED, PAID, PREPARING, READY, DELIVERED };
+
+class Order {
+private:
+    OrderStatus status;
+    int retryCount;
+public:
+    bool retryPayment() {
+        if(retryCount < 3) {
+            retryCount++;
+            return makePayment();  // Retry
+        }
+        return false;
+    }
+    void refund() {
+        status = OrderStatus::REFUNDED;
+        paymentMode->refund(getTotalAmount());  // Add refund() to PaymentStrategy
+    }
+};
+
+////////
+
+Q5: How would you scale notification delivery (async queue, retries) and add logging/observability?
+Answer:
+
+Async Notification Queue:
+Replace synchronous notification with an async queue:
+
+class NotificationQueue {
+private:
+    queue<Order*> pendingNotifications;
+    bool isProcessing;
+public:
+    void enqueueNotification(Order* order) {
+        pendingNotifications.push(order);
+    }
+    void processAsync() {
+        // Run in a background thread
+        while(isProcessing) {
+            if(!pendingNotifications.empty()) {
+                Order* order = pendingNotifications.front();
+                pendingNotifications.pop();
+                if(!sendNotification(order)) {
+                    // Retry on failure
+                    enqueueNotification(order);
+                }
+            }
+        }
+    }
+};
+
+
+Logging & Observability:
+Create a simple logger:
+
+class Logger {
+public:
+    static void log(string level, string message) {
+        cout << "[" << level << "] " << message << endl;
+        // Write to file or external service
+    }
+};
+
+// Usage in Order:
+void Order::makePayment() {
+    Logger::log("INFO", "Order " + to_string(getOrderId()) + " initiating payment...");
+    paymentMode->pay(user->getCart().totalCartPrice());
+    Logger::log("INFO", "Payment successful for order " + to_string(getOrderId()));
+}
