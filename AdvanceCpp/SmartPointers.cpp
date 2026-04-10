@@ -40,7 +40,7 @@ does not contribute to reference count
 */
 
 #include <iostream>
-#include <bits/stdc++.h>
+#include <memory>
 using namespace std;
 
 int main() {

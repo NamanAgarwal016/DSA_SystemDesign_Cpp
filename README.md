@@ -43,11 +43,14 @@ This repository is my personal C++ practice workspace for Data Structures & Algo
   - Zomato clone
 - **UML diagrams and design documentation** included as PDFs and images.
 
-### Core C++ Files
-- `SmartPointers.cpp` — completed smart pointers topic with unique_ptr, shared_ptr, weak_ptr, and ownership rules.
-- `main.cpp` — general entry point file used to execute other C++ examples and temporary demos.
-- `MultiThreading.cpp` — basic multithreading examples.
-- `StringClassImplementation.cpp` — custom string class implementation.
+### AdvanceCpp/
+- `AdvanceCpp/Template.cpp` — template examples including function and class templates.
+- `AdvanceCpp/SmartPointers.cpp` — completed smart pointers topic with unique_ptr, shared_ptr, weak_ptr, and ownership rules.
+- `AdvanceCpp/MultiThreading.cpp` — basic multithreading examples.
+- `AdvanceCpp/StringClassImplementation.cpp` — custom string class implementation.
+
+### Top-level files
+- `main.cpp` — general entry point file used to execute different C++ examples and temporary demos.
 
 ## 🚀 Getting Started
 
@@ -63,8 +66,14 @@ cd DSA_SystemDesign_Cpp
 
 ### Compile and run a file
 ```bash
-g++ SmartPointers.cpp -o SmartPointers
+g++ AdvanceCpp/SmartPointers.cpp -o SmartPointers
 ./SmartPointers
+```
+
+### Compile and run template examples
+```bash
+g++ AdvanceCpp/Template.cpp -o TemplateDemo
+./TemplateDemo
 ```
 
 ### Using `main.cpp`
