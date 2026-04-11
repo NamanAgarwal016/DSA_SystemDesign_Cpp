@@ -46,6 +46,7 @@ This repository is my personal C++ practice workspace for Data Structures & Algo
 ### AdvanceCpp/
 - `AdvanceCpp/Template.cpp` — template examples including function and class templates.
 - `AdvanceCpp/SmartPointers.cpp` — completed smart pointers topic with unique_ptr, shared_ptr, weak_ptr, and ownership rules.
+- `AdvanceCpp/MemoryManagement.cpp` — comprehensive memory management guide with malloc/new/smart pointer examples.
 - `AdvanceCpp/MultiThreading.cpp` — basic multithreading examples.
 - `AdvanceCpp/StringClassImplementation.cpp` — custom string class implementation.
 
@@ -68,6 +69,12 @@ cd DSA_SystemDesign_Cpp
 ```bash
 g++ AdvanceCpp/SmartPointers.cpp -o SmartPointers
 ./SmartPointers
+```
+
+### Compile and run memory management guide
+```bash
+g++ AdvanceCpp/MemoryManagement.cpp -o MemoryManagement
+./MemoryManagement
 ```
 
 ### Compile and run template examples
