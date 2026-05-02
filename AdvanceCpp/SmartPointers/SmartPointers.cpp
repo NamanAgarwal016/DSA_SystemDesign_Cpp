@@ -1,4 +1,4 @@
-/*
+﻿/*
 Smart pointers:
 - Template classes having a raw pointer.
 - when obj is made, address is passed & raw pointer starts pointing to that address

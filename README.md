@@ -45,7 +45,9 @@ This repository is my personal C++ practice workspace for Data Structures & Algo
 
 ### AdvanceCpp/
 - `AdvanceCpp/Template.cpp` — template examples including function and class templates.
-- `AdvanceCpp/SmartPointers.cpp` — completed smart pointers topic with unique_ptr, shared_ptr, weak_ptr, and ownership rules.
+- `AdvanceCpp/SmartPointers.cpp` — concise smart-pointer revision with unique_ptr, shared_ptr, weak_ptr, ownership rules, and practical examples.
+- `AdvanceCpp/SmartPointers/UniquePointerImplementation.cpp` — custom unique pointer implementation with move semantics, reset, release, and ownership rules.
+- `AdvanceCpp/SmartPointers/SharedPointerImplementation.cpp` — custom shared pointer implementation using reference counting, copy/move semantics, and reset behavior.
 - `AdvanceCpp/MemoryManagement.cpp` — comprehensive memory management guide with malloc/new/smart pointer examples.
 - `AdvanceCpp/MultiThreading.cpp` — comprehensive multithreading guide with threads, mutex, condition variables, and async programming - interview prep friendly.
 - `AdvanceCpp/StringClassImplementation.cpp` — custom string class implementation.
