@@ -48,6 +48,7 @@ This repository is my personal C++ practice workspace for Data Structures & Algo
 - `AdvanceCpp/SmartPointers.cpp` — concise smart-pointer revision with unique_ptr, shared_ptr, weak_ptr, ownership rules, and practical examples.
 - `AdvanceCpp/SmartPointers/UniquePointerImplementation.cpp` — custom unique pointer implementation with move semantics, reset, release, and ownership rules.
 - `AdvanceCpp/SmartPointers/SharedPointerImplementation.cpp` — custom shared pointer implementation using reference counting, copy/move semantics, and reset behavior.
+- `AdvanceCpp/StackQueueImplementation.cpp` — stack and queue implementations using arrays and linked lists, with smart-pointer-backed linked-list support.
 - `AdvanceCpp/MemoryManagement.cpp` — comprehensive memory management guide with malloc/new/smart pointer examples.
 - `AdvanceCpp/MultiThreading.cpp` — comprehensive multithreading guide with threads, mutex, condition variables, and async programming - interview prep friendly.
 - `AdvanceCpp/StringClassImplementation.cpp` — custom string class implementation.
@@ -92,18 +93,11 @@ g++ main.cpp -o main
 ./main
 ```
 
+### Stack / Queue Demo
+The repo also includes `AdvanceCpp/StackQueueImplementation.cpp` for array-backed and linked-list-backed stack/queue examples, useful for interview practice.
+
 ## 🧠 Notes
 
 - Each `.cpp` file is typically self-contained.
-- Use `make` or custom build scripts only if added later.
-- Avoid committing compiled binaries; keep the repository source-only when possible.
-
-## 🤝 Contributing
-
-This repo is for learning and sharing. Contributions, improvements, and issue reports are welcome.
-
-## 📄 License
-
-This project is available under the [MIT License](LICENSE).
 
 Happy coding! 🚀
